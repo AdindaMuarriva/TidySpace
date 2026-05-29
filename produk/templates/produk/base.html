@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TidySpace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cream: #f5f1eb;
+    --warm-white: #faf8f5;
+    --charcoal: #1e1e1e;
+    --muted: #7a7570;
+    --accent: #c4a882;
+    --accent-dark: #9c7f5e;
+    --border: rgba(30,30,30,0.1);
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 64px;
+    background: rgba(245,241,235,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+}
+
+nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--charcoal);
+}
+
+nav .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--charcoal);
+    transition: width 0.25s ease;
+}
+
+nav a:hover {
+    color: var(--charcoal);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* CONTAINER */
+.container {
+    padding: 48px 64px 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* HERO */
+.hero {
+    height: 460px;
+    border-radius: 16px;
+    background: url('https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1400&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 48px 52px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+    border-radius: 16px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+}
+
+.hero p {
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* SECTION TITLE */
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 60px 0 28px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--charcoal);
+}
+
+.section-link {
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.section-link:hover {
+    color: var(--charcoal);
+    border-color: var(--charcoal);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+/* CARD */
+.card {
+    background: var(--warm-white);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(30,30,30,0.1);
+}
+
+.card-img-wrap {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #ece9e3;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.card:hover .card-img-wrap img {
+    transform: scale(1.04);
+}
+
+.card-body {
+    padding: 18px 20px 20px;
+}
+
+.card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+}
+
+.card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.price {
+    font-size: 14px;
+    color: var(--accent-dark);
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    padding: 9px 20px;
+    border-radius: 100px;
+    background: var(--charcoal);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+    background: var(--accent-dark);
+    transform: scale(1.02);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--border);
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">TidySpace</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/produk/">Catalog</a>
+        <a href="/kontak/">Contact</a>
+        <a href="/orders/cart/" style="position:relative;">
+
+            Cart
+
+            {% if request.session.cart %}
+            <span style="
+                position:absolute;
+                top:-8px;
+                right:-14px;
+                background:#1e1e1e;
+                color:white;
+                width:20px;
+                height:20px;
+                border-radius:50%;
+                font-size:11px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            ">
+                {{ request.session.cart|length }}
+            </span>
+            {% endif %}
+
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+
+        {% if messages %}
+            {% for message in messages %}
+
+            <div style="
+                position:fixed;
+                top:30px;
+                right:30px;
+                background:#1e1e1e;
+                color:white;
+                padding:16px 22px;
+                border-radius:14px;
+                z-index:9999;
+                animation:fadeIn .3s;
+            ">
+                {{ message }}
+            </div>
+
+            {% endfor %}
+        {% endif %}
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer>
+    &copy; 2026 TidySpace — Furniture that speaks.
+</footer>
+
+</body>
+</html>

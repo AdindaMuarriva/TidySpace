@@ -1,0 +1,49 @@
+{% extends 'produk/base.html' %}
+
+{% block content %}
+
+<style>
+
+.success-wrapper{
+    text-align:center;
+    padding:120px 20px;
+}
+
+.success-title{
+    font-size:42px;
+    margin-bottom:16px;
+}
+
+.success-text{
+    color:#777;
+    margin-bottom:32px;
+}
+
+.success-btn{
+    display:inline-block;
+    padding:14px 32px;
+    background:#1f1f1f;
+    color:white;
+    border-radius:100px;
+    text-decoration:none;
+}
+
+</style>
+
+<div class="success-wrapper">
+
+    <div class="success-title">
+        Order Successful ✨
+    </div>
+
+    <div class="success-text">
+        Thank you for shopping with TidySpace.
+    </div>
+
+    <a href="/produk/" class="success-btn">
+        Continue Shopping
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,271 @@
+{% extends 'produk/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<style>
+
+.cart-page{
+    display:grid;
+    grid-template-columns: 1.5fr .8fr;
+    gap:40px;
+    align-items:start;
+}
+
+.cart-card{
+    background:white;
+    border:1px solid #ece7df;
+    border-radius:20px;
+    padding:24px;
+    margin-bottom:20px;
+}
+
+.cart-item{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.cart-item img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-name{
+    font-size:22px;
+    font-family:'Cormorant Garamond', serif;
+    margin-bottom:8px;
+}
+
+.cart-category{
+    font-size:12px;
+    color:#888;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:10px;
+}
+
+.cart-price{
+    font-size:18px;
+    font-weight:500;
+}
+
+.summary-box{
+    background:white;
+    border:1px solid #ece7df;
+    border-radius:20px;
+    padding:28px;
+    position:sticky;
+    top:120px;
+}
+
+.summary-title{
+    font-size:22px;
+    margin-bottom:24px;
+    font-family:'Cormorant Garamond', serif;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:14px;
+    font-size:14px;
+}
+
+.summary-total{
+    font-size:22px;
+    font-weight:600;
+    margin-top:24px;
+}
+
+.checkout-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:100px;
+    background:#1f1f1f;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+}
+
+.empty-cart{
+    text-align:center;
+    padding:80px 0;
+}
+
+</style>
+
+<div class="section-title" style="margin-bottom:40px;">
+    Shopping Cart
+</div>
+
+{% if items %}
+
+<div class="cart-page">
+
+    <!-- LEFT -->
+    <div>
+
+        {% for item in items %}
+        <div class="cart-card">
+
+            <div class="cart-item">
+
+                <img src="{{ item.product.image.url }}">
+
+                <div class="cart-info">
+
+                    <div class="cart-category">
+                        {{ item.product.category }}
+                    </div>
+
+                    <div class="cart-name">
+                        {{ item.product.name }}
+                    </div>
+
+                    <div class="cart-price">
+                        Rp {{ item.product.price|floatformat:0|intcomma }}
+                    </div>
+
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                        gap:14px;
+                        margin-top:14px;
+                    ">
+
+                        <a href="{% url 'decrease_quantity' item.product.id %}"
+                        style="
+                            width:32px;
+                            height:32px;
+                            border-radius:50%;
+                            border:1px solid #ddd;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            text-decoration:none;
+                            color:#1e1e1e;
+                        ">
+                        -
+                        </a>
+
+                        <span style="font-size:15px;">
+                            {{ item.qty }}
+                        </span>
+
+                        <a href="{% url 'increase_quantity' item.product.id %}"
+                        style="
+                            width:32px;
+                            height:32px;
+                            border-radius:50%;
+                            border:1px solid #ddd;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            text-decoration:none;
+                            color:#1e1e1e;
+                        ">
+                        +
+                        </a>
+
+                    </div>
+
+
+                    <a href="/orders/remove/{{ item.product.id }}/"
+                    style="
+                        display:inline-block;
+                        margin-top:12px;
+                        font-size:13px;
+                        color:#999;
+                        text-decoration:none;
+                    ">
+                    Remove
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="summary-box">
+
+        <div class="summary-title">
+            Order Summary
+        </div>
+
+        <div class="summary-row">
+            <span>Total Item</span>
+            <span>{{ items|length }}</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Shipping</span>
+            <span>Free</span>
+        </div>
+
+        <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
+
+        <div class="summary-row summary-total">
+            <span>Total</span>
+            <span>Rp {{ total }}</span>
+        </div>
+
+        <a href="/orders/checkout/" class="checkout-btn">
+            Proceed to Checkout
+        </a>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="empty-cart">
+
+    <h2 style="
+        font-size:32px;
+        margin-bottom:12px;
+    ">
+        Your cart is empty
+    </h2>
+
+    <p style="
+        color:#777;
+        margin-bottom:30px;
+    ">
+        Discover timeless furniture crafted for modern living.
+    </p>
+
+    <a href="/produk/"
+       style="
+          display:inline-block;
+          padding:14px 30px;
+          border-radius:999px;
+          background:#1e1e1e;
+          color:white;
+          text-decoration:none;
+       ">
+       Continue Shopping
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

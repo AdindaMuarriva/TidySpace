@@ -1,0 +1,124 @@
+{% extends 'produk/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<div class="section-header">
+    <div class="section-title">Catalog</div>
+    <span style="font-size:13px; color: var(--muted);">{{ produk|length }} items</span>
+</div>
+
+<form method="GET" style="margin-bottom: 36px;">
+    <div style="
+        display:flex;
+        gap:12px;
+        align-items:center;
+    ">
+        <input
+            type="text"
+            name="q"
+            placeholder="Search furniture..."
+            value="{{ query|default:'' }}"
+            style="
+                flex:1;
+                padding:14px 18px;
+                border-radius:100px;
+                border:1px solid var(--border);
+                background: var(--warm-white);
+                font-family:'DM Sans', sans-serif;
+                font-size:14px;
+                outline:none;
+            "
+        >
+
+        <button
+            type="submit"
+            class="btn"
+            style="border:none; cursor:pointer;"
+        >
+            Search
+        </button>
+    </div>
+</form>
+
+<div class="grid">
+    {% for item in produk %}
+    <div class="card">
+        <div class="card-img-wrap">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        </div>
+        <div class="card-body">
+            <div class="card-sub">{{ item.category }}</div>
+            <h3>{{ item.name }}</h3>
+            <div class="price">Rp {{ item.price|floatformat:0|intcomma }}</div>
+            <a href="/produk/{{ item.id }}/" class="btn">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div style="
+    margin-top:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+">
+
+    {% if produk.has_previous %}
+        <a href="?page={{ produk.previous_page_number }}{% if query %}&q={{ query }}{% endif %}"
+           class="btn">
+           Previous
+        </a>
+    {% endif %}
+
+    {% for num in produk.paginator.page_range %}
+
+        {% if produk.number == num %}
+
+            <span style="
+                width:42px;
+                height:42px;
+                border-radius:50%;
+                background: var(--charcoal);
+                color:white;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:13px;
+            ">
+                {{ num }}
+            </span>
+
+        {% else %}
+
+            <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}"
+               style="
+                    width:42px;
+                    height:42px;
+                    border-radius:50%;
+                    border:1px solid var(--border);
+                    color:var(--charcoal);
+                    text-decoration:none;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:13px;
+               ">
+                {{ num }}
+            </a>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if produk.has_next %}
+        <a href="?page={{ produk.next_page_number }}{% if query %}&q={{ query }}{% endif %}"
+           class="btn">
+           Next
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

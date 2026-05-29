@@ -1,0 +1,275 @@
+{% extends 'produk/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<style>
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+.contact-left .section-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.contact-intro {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 48px;
+}
+
+.contact-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.contact-info-item label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.contact-info-item span,
+.contact-info-item a {
+    font-size: 15px;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.contact-info-item a:hover {
+    color: var(--accent-dark);
+}
+
+.divider-line {
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+}
+
+.contact-form {
+    background: var(--warm-white);
+    border-radius: 16px;
+    padding: 40px 44px;
+    border: 1px solid var(--border);
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.25s ease;
+    resize: none;
+    appearance: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent);
+    background: white;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-submit {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-note {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.btn-large {
+    display: inline-block;
+    padding: 13px 32px;
+    border-radius: 100px;
+    background: var(--charcoal);
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s;
+}
+
+.btn-large:hover { background: var(--accent-dark); }
+
+.success-popup{
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #1f1f1f;
+    color: white;
+    padding: 16px 22px;
+    border-radius: 14px;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all .3s ease;
+    z-index: 9999;
+}
+
+.success-popup.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+<div class="contact-layout">
+
+    <div class="contact-left">
+        <div class="section-title">Contact</div>
+        <p class="contact-intro">
+            Have questions about a piece, or want to arrange a showroom visit? We'd love to hear from you. Our team is here to help you find the perfect addition to your space.
+        </p>
+
+        <div class="contact-info-block">
+            <div class="contact-info-item">
+                <label>Showroom</label>
+                <span>Jl. Sejahtera No. 13<br>Banda Aceh 23111</span>
+            </div>
+            <div class="contact-info-item">
+                <label>Email</label>
+                <a href="mailto:hello@tidyspace.id">hello@tidyspace.id</a>
+            </div>
+            <div class="contact-info-item">
+                <label>WhatsApp</label>
+                <a href="https://wa.me/6281234567890">+62 812-3456-7890</a>
+            </div>
+            <div class="contact-info-item">
+                <label>Hours</label>
+                <span>Mon – Sat, 10:00 – 19:00 WIB</span>
+            </div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <div class="contact-info-item">
+            <label>Follow</label>
+            <span>
+                <a href="#" style="margin-right: 16px;">Instagram</a>
+                <a href="#">Pinterest</a>
+            </span>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" placeholder="Shawn">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Mendes">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+            <label>Subject</label>
+            <select>
+                <option value="">Select a topic</option>
+                <option>Product Inquiry</option>
+                <option>Custom Order</option>
+                <option>Showroom Visit</option>
+                <option>After-Sales</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" placeholder="Tell us what you have in mind…"></textarea>
+        </div>
+        <div class="form-submit">
+            <span class="form-note">We reply within 1 business day.</span>
+            <button type="button" class="btn-large" id="send-btn">
+                Send Message
+            </button>
+        </div>
+    </div>
+
+        <div class="success-popup" id="popup">
+            Message sent successfully to our team! We'll get back to you shortly.
+        </div>
+
+        <script>
+
+        const button = document.getElementById('send-btn');
+        const popup = document.getElementById('popup');
+
+        button.addEventListener('click', () => {
+
+            // SHOW POPUP
+            popup.classList.add('show');
+
+            // RESET FORM
+            document.querySelectorAll('.contact-form input').forEach(input => {
+                input.value = '';
+            });
+
+            document.querySelectorAll('.contact-form textarea').forEach(textarea => {
+                textarea.value = '';
+            });
+
+            document.querySelectorAll('.contact-form select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+
+            // HIDE POPUP
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2500);
+
+        });
+
+        </script>
+
+</div>
+
+{% endblock %}

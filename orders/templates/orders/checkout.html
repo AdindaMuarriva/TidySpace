@@ -1,0 +1,227 @@
+{% extends 'produk/base.html' %}
+
+{% block content %}
+
+<style>
+
+.summary-items{
+    margin-top:20px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+
+    padding:16px 0;
+    border-bottom:1px solid #f1f1f1;
+}
+
+.summary-row:last-child{
+    border-bottom:none;
+}
+
+.summary-product{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.summary-product-name{
+    font-size:15px;
+    font-weight:500;
+    color:#1f1f1f;
+}
+
+.summary-qty{
+    font-size:13px;
+    color:#888;
+}
+
+.summary-price{
+    font-size:15px;
+    font-weight:600;
+    color:#1f1f1f;
+}
+
+.total-box{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1.5px solid #eaeaea;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-label{
+    font-size:18px;
+    font-weight:500;
+}
+
+.total-price{
+    font-size:28px;
+    font-weight:700;
+}
+
+.checkout-container{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap:40px;
+    padding:40px 0;
+}
+
+.checkout-card{
+    background:white;
+    border:1px solid #eee;
+    border-radius:20px;
+    padding:32px;
+}
+
+.checkout-title{
+    font-size:28px;
+    margin-bottom:30px;
+    font-weight:600;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.order-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.total{
+    border-top:1px solid #eee;
+    padding-top:20px;
+    margin-top:20px;
+    font-size:22px;
+    font-weight:600;
+}
+
+.checkout-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:100px;
+    background:#1f1f1f;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:24px;
+}
+
+</style>
+
+<div class="checkout-container">
+
+    <div class="checkout-card">
+
+        <div class="checkout-title">
+            Checkout
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Shipping Address</label>
+                <textarea name="address" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="checkout-btn">
+                Place Order
+            </button>
+
+        </form>
+    </div>
+
+        <div class="checkout-card">
+
+            <div class="checkout-title">
+                Order Summary
+            </div>
+
+            <div class="summary-items">
+
+                {% for item in cart_items %}
+
+                <div class="summary-row">
+
+                    <div class="summary-product">
+
+                        <div class="summary-product-name">
+                            {{ item.product.name }}
+                        </div>
+
+                        <div class="summary-qty">
+                            Quantity: {{ item.quantity }}
+                        </div>
+
+                    </div>
+
+                    <div class="summary-price">
+                        Rp {{ item.subtotal }}
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="total-box">
+
+                <div class="total-label">
+                    Total
+                </div>
+
+                <div class="total-price">
+                    Rp {{ total }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

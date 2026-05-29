@@ -1,0 +1,33 @@
+{% extends 'produk/base.html' %}
+{% load humanize %}
+{% block content %}
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>Designer Furniture</h1>
+        <p>is a balance of comfort and aesthetics</p>
+    </div>
+</div>
+
+<div class="section-header">
+    <div class="section-title">New Collection</div>
+    <a href="/produk/" class="section-link">View all →</a>
+</div>
+
+<div class="grid">
+    {% for item in featured %}
+    <div class="card">
+        <div class="card-img-wrap">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        </div>
+        <div class="card-body">
+            <div class="card-sub">{{ item.category }}</div>
+            <h3>{{ item.name }}</h3>
+            <div class="price">Rp {{ item.price|floatformat:0|intcomma }}</div>
+            <a href="/produk/" class="btn">Explore</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
