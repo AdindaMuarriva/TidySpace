@@ -5,7 +5,7 @@ Proyek ini dikembangkan sebagai bagian dari tugas mata kuliah Proyek Perangkat L
 
 ---
 
-# ✨ Fitur Utama
+# Fitur Utama
 
 * Katalog furniture modern
 * Halaman detail produk
@@ -30,7 +30,7 @@ Proyek ini dikembangkan sebagai bagian dari tugas mata kuliah Proyek Perangkat L
 
 ---
 
-# 📂 Struktur Project
+# Struktur Project
 
 ```bash
 TidySpace/
@@ -46,7 +46,7 @@ TidySpace/
 
 ---
 
-# ⚙️ Cara Menjalankan Project
+# Cara Menjalankan Project
 
 ## 1. Clone Repository
 
@@ -119,7 +119,7 @@ http://127.0.0.1:8000
 
 ---
 
-# 🛒 Alur Pemesanan
+# Alur Pemesanan
 
 1. User melihat katalog produk
 2. User menambahkan produk ke cart
@@ -131,7 +131,7 @@ http://127.0.0.1:8000
 
 ---
 
-# 🔑 Admin Panel
+# Admin Panel
 
 Halaman admin:
 
@@ -147,7 +147,7 @@ Admin dapat:
 
 ---
 
-# 📸 Tampilan Sistem
+# Tampilan Sistem
 
 ### Home Page
 
