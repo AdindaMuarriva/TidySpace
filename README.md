@@ -144,6 +144,8 @@ Admin dapat:
 * Menambahkan produk
 * Mengatur stok produk
 * Mengubah harga produk
+* Menghapus produk
+* Melihat histori pemesanan
 
 ---
 
